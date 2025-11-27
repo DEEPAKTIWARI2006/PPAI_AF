@@ -1,0 +1,11 @@
+allure-pytest
+Appium-Python-Client
+dotenv
+pytest
+pytest-xdist
+playwright
+pytest-playwright
+behave
+allure-behave
+allure-python-commons
+
