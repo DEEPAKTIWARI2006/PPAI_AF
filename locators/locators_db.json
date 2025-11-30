@@ -1,0 +1,28 @@
+{
+  "LoginPage.username_input": {
+    "primary": "input#username",
+    "backups": [
+      "input[name='username']",
+      "//input[contains(@class,'user') and @type='text']",
+      "xpath=//label[text()='Username']/following::input[1]",
+      "role=input[name='Username']"
+    ],
+    "meta": {
+      "page": "LoginPage",
+      "description": "Username field on login page"
+    }
+  },
+
+  "LoginPage.password_input": {
+    "primary": "input#password",
+    "backups": [
+      "input[name='password']",
+      "//input[contains(@class,'pass') and @type='password']",
+      "xpath=//label[text()='Password']/following::input[1]"
+    ],
+    "meta": {
+      "page": "LoginPage",
+      "description": "Password field on login page"
+    }
+  }
+}

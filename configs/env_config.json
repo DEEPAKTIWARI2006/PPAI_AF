@@ -1,0 +1,11 @@
+{
+  "dev": {
+    "base_url": "https://demo.automationtesting.in/Register.html"
+  },
+  "qa": {
+    "base_url": "https://demo.automationtesting.in/Register.html"
+  },
+  "prod": {
+    "base_url": "https://demo.automationtesting.in/Register.html"
+  }
+}
