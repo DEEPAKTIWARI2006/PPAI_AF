@@ -5,7 +5,6 @@ import allure
 from playwright.sync_api import sync_playwright
 from pages.page_factory import PageFactory
 
-
 # -------------------- CONFIG LOADER --------------------
 def load_config():
     config_path = os.path.join(os.getcwd(), "configs", "browser_config.json")
@@ -17,6 +16,10 @@ def load_config():
 # -------------------- HOOKS --------------------
 def before_all(context):
     print(">>> before_all executed")
+    context.config.setup_cleanup = True
+    context.config.userdata["error_on_cleanup"] = True
+    context.config.userdata["show_internal_cleanup_errors"] = True
+
     context.config = load_config()
     context.playwright = sync_playwright().start()
 
@@ -35,14 +38,11 @@ def before_scenario(context, scenario):
     video = cfg.get("video", "on")
     trace = cfg.get("trace", "on")
 
-    # Safe device config load
     mobile_emulation = cfg.get("devices", {}).get("mobile_emulation", {})
     android_cfg = cfg.get("android", {})
 
-    # ---------------- DESKTOP WEB EXECUTION ----------------
+    # ---------------- DESKTOP ----------------
     if platform == "desktop":
-
-        # Select browser
         if browser_name in ["chromium", "chrome"]:
             launch_browser = context.playwright.chromium
         elif browser_name == "firefox":
@@ -60,20 +60,15 @@ def before_scenario(context, scenario):
             slow_mo=slow_mo
         )
 
-        # ---- Mobile Emulation ----
         if mobile_emulation.get("enabled", False):
             device_name = mobile_emulation.get("device_name")
             device_profile = context.playwright.devices.get(device_name)
-
             if not device_profile:
                 raise ValueError(f"Playwright device '{device_name}' not found.")
-
             context.browser_context = context.browser.new_context(
                 **device_profile,
                 record_video_dir=video_dir if video == "on" else None
             )
-
-        # ---- Desktop Browser ----
         else:
             context.browser_context = context.browser.new_context(
                 viewport=viewport,
@@ -85,24 +80,24 @@ def before_scenario(context, scenario):
 
         context.page = context.browser_context.new_page()
 
-    # ---------------- ANDROID DEVICE EXECUTION ----------------
+    # ---------------- ANDROID ----------------
     elif platform == "android":
         print(">>> Launching tests on Android device")
 
         if not android_cfg.get("enabled", False):
-            raise RuntimeError("Android platform selected but 'android.enabled' is false.")
+            raise RuntimeError("Android enabled = false in config")
 
-        device_serial = android_cfg.get("device_serial", None)
+        serial = android_cfg.get("device_serial")
         package = android_cfg.get("package", "com.android.chrome")
-        context.device = context.playwright.android.connect_over_adb(serial=device_serial)
+
+        context.device = context.playwright.android.connect_over_adb(serial=serial)
         context.browser_context = context.device.launch_browser(package_name=package)
         context.page = context.browser_context.new_page()
         context.browser = None
 
     else:
-        raise ValueError(f"Unknown platform: {platform}")
+        raise ValueError(f"Unsupported platform: {platform}")
 
-    # Attach POM factory
     context.factory = PageFactory
 
 
@@ -111,22 +106,24 @@ def after_scenario(context, scenario):
     print(">>> after_scenario executed")
 
     cfg = context.config
-    platform = cfg.get("platform", "desktop")
+    platform = cfg.get("platform", "desktop").lower()
     screenshot_behavior = cfg.get("screenshot", "only-on-failure")
 
-    # Screenshot on failure
-    if scenario.status == "failed" and screenshot_behavior in ["on", "only-on-failure"]:
-        os.makedirs("screenshots", exist_ok=True)
-        screenshot_path = f"screenshots/{scenario.name}_{int(time.time())}.png"
-        context.page.screenshot(path=screenshot_path)
+    # ----- Screenshot -----
+    try:
+        if scenario.status.name == "failed" and screenshot_behavior in ["on", "only-on-failure"]:
+            os.makedirs("screenshots", exist_ok=True)
+            screenshot_path = f"screenshots/{scenario.name}_{int(time.time())}.png"
+            context.page.screenshot(path=screenshot_path)
+            allure.attach.file(
+                screenshot_path,
+                name="Failure Screenshot",
+                attachment_type=allure.attachment_type.PNG
+            )
+    except Exception as e:
+        print(f"Screenshot error: {e}")
 
-        allure.attach.file(
-            screenshot_path,
-            name="Failure Screenshot",
-            attachment_type=allure.attachment_type.PNG
-        )
-
-    # ---- Trace ----
+    # ----- Trace stop -----
     try:
         if platform == "desktop" and cfg.get("trace") == "on":
             trace_dir = f"traces/{scenario.name.replace(' ', '_')}"
@@ -135,24 +132,36 @@ def after_scenario(context, scenario):
     except Exception as e:
         print(f"Trace stop error: {e}")
 
-    # ---- Desktop shutdown ----
+    # ----- Desktop close -----
     if platform == "desktop":
-        try:
-            context.page.close()
-            context.browser_context.close()
-            context.browser.close()
-        except:
-            pass
+        for attr in ["page", "browser_context", "browser"]:
+            try:
+                obj = getattr(context, attr, None)
+                if obj:
+                    obj.close()
+            except Exception as e:
+                print(f"{attr} close error: {e}")
 
-    # ---- Android shutdown ----
+    # ----- Android close -----
     elif platform == "android":
         try:
-            context.browser_context.close()
-            context.device.close()
+            if hasattr(context, "browser_context"):
+                context.browser_context.close()
         except Exception as e:
-            print(f"Android close error: {e}")
+            print(f"browser_context close error: {e}")
+
+        try:
+            if hasattr(context, "device"):
+                context.device.close()
+        except Exception as e:
+            print(f"device close error: {e}")
 
 
+# ---------------- AFTER ALL ----------------
 def after_all(context):
     print(">>> after_all executed")
-    context.playwright.stop()
+    try:
+        if hasattr(context, "playwright"):
+            context.playwright.stop()
+    except Exception as e:
+        print(f"Playwright stop error: {e}")
