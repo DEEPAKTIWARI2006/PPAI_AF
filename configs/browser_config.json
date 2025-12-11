@@ -16,19 +16,19 @@
   "browsers": {
     "chromium": {
       "channel": "chrome",
-      "headless": true
+      "headless": false
     },
     "chrome": {
       "channel": "chrome",
-      "headless": true
+      "headless": false
     },
     "firefox": {
       "channel": "firefox",
-      "headless": true
+      "headless": false
     },
     "webkit": {
       "channel": "webkit",
-      "headless": true
+      "headless": false
     }
   },
 
