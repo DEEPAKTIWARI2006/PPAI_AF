@@ -1,0 +1,16 @@
+FROM python:3.11-slim
+
+WORKDIR /playwright_python_tests
+
+RUN apt-get update && apt-get install -y \
+    wget \
+    curl \
+    unzip \
+    && apt-get clean
+
+COPY . /playwright_python_tests
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Run behave tests when the container starts
+CMD ["behave"]

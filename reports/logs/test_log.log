@@ -90,3 +90,27 @@
 2025-11-30 18:41:29,536 - LoginPage - INFO - Entering last name: wiuertiwer
 2025-11-30 18:41:29,537 - LoginPage - INFO - Filling: //input[@placeholder='Last Name'] with value: wiuertiwer
 2025-11-30 18:41:29,537 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='Last Name']
+2025-12-10 12:49:21,051 - LoginPage - INFO - Opening Login Page
+2025-12-10 12:49:21,052 - LoginPage - INFO - Navigating to: https://demo.automationtesting.in/Register.html
+2025-12-10 12:49:23,699 - LoginPage - INFO - Entering first name: sdafsdf
+2025-12-10 12:49:23,699 - LoginPage - INFO - Filling: //input[@placeholder='First Name'] with value: sdafsdf
+2025-12-10 12:49:23,699 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='First Name']
+2025-12-10 12:49:23,905 - LoginPage - INFO - Entering last name: wiuertiwer
+2025-12-10 12:49:23,905 - LoginPage - INFO - Filling: //input[@placeholder='Last Name'] with value: wiuertiwer
+2025-12-10 12:49:23,906 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='Last Name']
+2025-12-10 09:56:11,875 - LoginPage - INFO - Opening Login Page
+2025-12-10 09:56:11,876 - LoginPage - INFO - Navigating to: https://demo.automationtesting.in/Register.html
+2025-12-10 09:56:13,725 - LoginPage - INFO - Entering first name: sdafsdf
+2025-12-10 09:56:13,725 - LoginPage - INFO - Filling: //input[@placeholder='First Name'] with value: sdafsdf
+2025-12-10 09:56:13,726 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='First Name']
+2025-12-10 09:56:13,827 - LoginPage - INFO - Entering last name: wiuertiwer
+2025-12-10 09:56:13,828 - LoginPage - INFO - Filling: //input[@placeholder='Last Name'] with value: wiuertiwer
+2025-12-10 09:56:13,828 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='Last Name']
+2025-12-11 05:05:42,015 - LoginPage - INFO - Opening Login Page
+2025-12-11 05:05:42,015 - LoginPage - INFO - Navigating to: https://demo.automationtesting.in/Register.html
+2025-12-11 05:05:44,686 - LoginPage - INFO - Entering first name: sdafsdf
+2025-12-11 05:05:44,687 - LoginPage - INFO - Filling: //input[@placeholder='First Name'] with value: sdafsdf
+2025-12-11 05:05:44,688 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='First Name']
+2025-12-11 05:05:44,801 - LoginPage - INFO - Entering last name: wiuertiwer
+2025-12-11 05:05:44,802 - LoginPage - INFO - Filling: //input[@placeholder='Last Name'] with value: wiuertiwer
+2025-12-11 05:05:44,802 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='Last Name']

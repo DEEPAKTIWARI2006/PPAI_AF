@@ -6,6 +6,7 @@ pytest-xdist
 playwright
 pytest-playwright
 behave
+behave-html-formatter
 allure-behave
 allure-python-commons
 

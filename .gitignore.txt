@@ -2,12 +2,15 @@
 /test-results/
 /reports/
 
+result.json
+
 # Screenshots and Videos
 /screenshots/
 /videos/
 
 Python Cache data
 /__pycache__/
+*.pyc
 
 
 # Environment files
@@ -20,5 +23,8 @@ Python Cache data
 
 
 
+
 # Logs
 *.log
+*.webm
+*.zip

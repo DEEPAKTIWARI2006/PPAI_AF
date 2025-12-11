@@ -1,7 +1,7 @@
 {
   "platform": "desktop",  
   "browser": "chromium",      
-  "headless": false,
+  "headless": true,
   "slow_mo": 0,
 
   "viewport": {
@@ -16,19 +16,19 @@
   "browsers": {
     "chromium": {
       "channel": "chrome",
-      "headless": false
+      "headless": true
     },
     "chrome": {
       "channel": "chrome",
-      "headless": false
+      "headless": true
     },
     "firefox": {
       "channel": "firefox",
-      "headless": false
+      "headless": true
     },
     "webkit": {
       "channel": "webkit",
-      "headless": false
+      "headless": true
     }
   },
 

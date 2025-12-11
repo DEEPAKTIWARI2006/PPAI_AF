@@ -28,7 +28,7 @@ def before_scenario(context, scenario):
 
     platform = cfg.get("platform", "desktop").lower()
     browser_name = cfg.get("browser", "chromium").lower()
-    headless = cfg.get("headless", False)
+    headless = cfg.get("headless", True)
     slow_mo = cfg.get("slow_mo", 0)
 
     viewport = cfg.get("viewport", {"width": 1920, "height": 1080})
