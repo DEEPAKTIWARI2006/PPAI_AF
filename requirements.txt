@@ -11,4 +11,5 @@ behave-html-formatter
 allure-behave
 allure-python-commons
 pytest-rerunfailures
+reportlab
 

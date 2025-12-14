@@ -12,10 +12,3 @@
 2025-12-14 16:14:53,997 - INFO - Entering last name
 2025-12-14 16:14:53,997 - INFO - Entering value: Tiwari into element: //input[@placeholder='Last Name']
 2025-12-14 16:14:54,040 - INFO - Clicking on element: //BUTTON[@TYPE='submit']
-2025-12-14 16:14:56,695 - INFO - Launching Registration Page
-2025-12-14 16:14:56,696 - INFO - Launching URL: https://demo.automationtesting.in/Register.html
-2025-12-14 16:14:58,085 - INFO - Entering first name
-2025-12-14 16:14:58,085 - INFO - Entering value: Vivaan into element: //input[@placeholder='First Name']
-2025-12-14 16:14:58,172 - INFO - Entering last name
-2025-12-14 16:14:58,172 - INFO - Entering value: Tiwari into element: //input[@placeholder='Last Name']
-2025-12-14 16:14:58,203 - INFO - Clicking on element: //BUTTON[@TYPE='submit']
