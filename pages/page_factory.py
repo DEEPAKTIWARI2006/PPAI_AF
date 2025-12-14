@@ -1,4 +1,5 @@
-from pages.login_page import LoginPage
+from pages.register_page import LoginPage
+from utils.logger import get_logger
 
 class PageFactory:
 

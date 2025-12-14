@@ -3,6 +3,7 @@ Appium-Python-Client
 dotenv
 pytest
 pytest-xdist
+pytest-html
 playwright
 pytest-playwright
 behave

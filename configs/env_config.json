@@ -1,11 +1,11 @@
 {
   "dev": {
-    "base_url": "https://demo.automationtesting.in/Register.html"
+    "base_url": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
   },
   "qa": {
-    "base_url": "https://demo.automationtesting.in/Register.html"
+    "base_url": "https://demo.automationtesting.in"
   },
   "prod": {
-    "base_url": "https://demo.automationtesting.in/Register.html"
+    "base_url": "https://demo.automationtesting.in"
   }
 }

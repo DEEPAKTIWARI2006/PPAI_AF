@@ -1,116 +1,36 @@
-2025-11-26 15:25:12,557 - LoginPage - INFO - Opening Login Page
-2025-11-26 15:25:12,557 - LoginPage - INFO - Navigating to: https://demo.automationtesting.in/Register.html
-2025-11-26 15:25:20,013 - LoginPage - INFO - Entering username: sdafsdf
-2025-11-26 15:25:20,013 - LoginPage - INFO - Entering password: wiuertiwer
-2025-11-26 15:34:38,440 - LoginPage - INFO - Opening Login Page
-2025-11-26 15:34:38,441 - LoginPage - INFO - Navigating to: https://demo.automationtesting.in/Register.html
-2025-11-26 15:34:42,272 - LoginPage - INFO - Entering first name: sdafsdf
-2025-11-26 15:34:42,272 - LoginPage - INFO - Filling: //input[@placeholder='First Name'] with value: sdafsdf
-2025-11-26 15:34:42,272 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='First Name']
-2025-11-26 15:34:42,361 - LoginPage - INFO - Entering last name: wiuertiwer
-2025-11-26 15:34:42,361 - LoginPage - INFO - Filling: //input[@placeholder='Last Name'] with value: wiuertiwer
-2025-11-26 15:34:42,362 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='Last Name']
-2025-11-26 15:43:11,664 - LoginPage - INFO - Opening Login Page
-2025-11-26 15:43:11,664 - LoginPage - INFO - Navigating to: https://demo.automationtesting.in/Register.html
-2025-11-26 15:43:14,032 - LoginPage - INFO - Entering first name: sdafsdf
-2025-11-26 15:43:14,032 - LoginPage - INFO - Filling: //input[@placeholder='First Name'] with value: sdafsdf
-2025-11-26 15:43:14,032 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='First Name']
-2025-11-26 15:43:14,104 - LoginPage - INFO - Entering last name: wiuertiwer
-2025-11-26 15:43:14,105 - LoginPage - INFO - Filling: //input[@placeholder='Last Name'] with value: wiuertiwer
-2025-11-26 15:43:14,105 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='Last Name']
-2025-11-28 13:09:06,655 - LoginPage - INFO - Opening Login Page
-2025-11-28 13:09:06,656 - LoginPage - INFO - Navigating to: https://demo.automationtesting.in/Register.html
-2025-11-28 13:09:08,206 - LoginPage - INFO - Entering first name: sdafsdf
-2025-11-28 13:09:08,206 - LoginPage - INFO - Filling: //input[@placeholder='First Name'] with value: sdafsdf
-2025-11-28 13:09:08,206 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='First Name']
-2025-11-28 13:09:08,275 - LoginPage - INFO - Entering last name: wiuertiwer
-2025-11-28 13:09:08,275 - LoginPage - INFO - Filling: //input[@placeholder='Last Name'] with value: wiuertiwer
-2025-11-28 13:09:08,275 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='Last Name']
-2025-11-28 14:58:09,970 - LoginPage - INFO - Opening Login Page
-2025-11-28 14:58:09,973 - LoginPage - INFO - Navigating to: https://demo.automationtesting.in/Register.html
-2025-11-28 14:58:14,914 - LoginPage - INFO - Entering first name: sdafsdf
-2025-11-28 14:58:14,914 - LoginPage - INFO - Filling: //input[@placeholder='First Name'] with value: sdafsdf
-2025-11-28 14:58:14,914 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='First Name']
-2025-11-28 14:58:15,069 - LoginPage - INFO - Entering last name: wiuertiwer
-2025-11-28 14:58:15,069 - LoginPage - INFO - Filling: //input[@placeholder='Last Name'] with value: wiuertiwer
-2025-11-28 14:58:15,069 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='Last Name']
-2025-11-28 15:00:10,052 - LoginPage - INFO - Opening Login Page
-2025-11-28 15:00:10,052 - LoginPage - INFO - Navigating to: https://demo.automationtesting.in/Register.html
-2025-11-28 15:00:11,920 - LoginPage - INFO - Entering first name: sdafsdf
-2025-11-28 15:00:11,921 - LoginPage - INFO - Filling: //input[@placeholder='First Name'] with value: sdafsdf
-2025-11-28 15:00:11,921 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='First Name']
-2025-11-28 15:00:12,053 - LoginPage - INFO - Entering last name: wiuertiwer
-2025-11-28 15:00:12,053 - LoginPage - INFO - Filling: //input[@placeholder='Last Name'] with value: wiuertiwer
-2025-11-28 15:00:12,053 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='Last Name']
-2025-11-28 15:00:54,490 - LoginPage - INFO - Opening Login Page
-2025-11-28 15:00:54,491 - LoginPage - INFO - Navigating to: https://demo.automationtesting.in/Register.html
-2025-11-28 15:00:58,143 - LoginPage - INFO - Entering first name: sdafsdf
-2025-11-28 15:00:58,143 - LoginPage - INFO - Filling: //input[@placeholder='First Name'] with value: sdafsdf
-2025-11-28 15:00:58,143 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='First Name']
-2025-11-28 15:00:58,525 - LoginPage - INFO - Entering last name: wiuertiwer
-2025-11-28 15:00:58,526 - LoginPage - INFO - Filling: //input[@placeholder='Last Name'] with value: wiuertiwer
-2025-11-28 15:00:58,526 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='Last Name']
-2025-11-28 15:01:34,032 - LoginPage - INFO - Opening Login Page
-2025-11-28 15:01:34,033 - LoginPage - INFO - Navigating to: https://demo.automationtesting.in/Register.html
-2025-11-28 15:01:37,067 - LoginPage - INFO - Entering first name: sdafsdf
-2025-11-28 15:01:37,067 - LoginPage - INFO - Filling: //input[@placeholder='First Name'] with value: sdafsdf
-2025-11-28 15:01:37,067 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='First Name']
-2025-11-28 15:01:37,423 - LoginPage - INFO - Entering last name: wiuertiwer
-2025-11-28 15:01:37,423 - LoginPage - INFO - Filling: //input[@placeholder='Last Name'] with value: wiuertiwer
-2025-11-28 15:01:37,423 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='Last Name']
-2025-11-28 15:05:53,649 - LoginPage - INFO - Opening Login Page
-2025-11-28 15:05:53,650 - LoginPage - INFO - Navigating to: https://demo.automationtesting.in/Register.html
-2025-11-28 15:05:55,970 - LoginPage - INFO - Entering first name: sdafsdf
-2025-11-28 15:05:55,970 - LoginPage - INFO - Filling: //input[@placeholder='First Name'] with value: sdafsdf
-2025-11-28 15:05:55,970 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='First Name']
-2025-11-28 15:05:56,121 - LoginPage - INFO - Entering last name: wiuertiwer
-2025-11-28 15:05:56,122 - LoginPage - INFO - Filling: //input[@placeholder='Last Name'] with value: wiuertiwer
-2025-11-28 15:05:56,122 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='Last Name']
-2025-11-30 18:31:55,786 - LoginPage - INFO - Opening Login Page
-2025-11-30 18:31:55,787 - LoginPage - INFO - Navigating to: https://demo.automationtesting.in/Register.html
-2025-11-30 18:31:58,788 - LoginPage - INFO - Entering first name: sdafsdf
-2025-11-30 18:31:58,788 - LoginPage - INFO - Filling: //input[@placeholder='First Name'] with value: sdafsdf
-2025-11-30 18:31:58,788 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='First Name']
-2025-11-30 18:31:59,026 - LoginPage - INFO - Entering last name: wiuertiwer
-2025-11-30 18:31:59,027 - LoginPage - INFO - Filling: //input[@placeholder='Last Name'] with value: wiuertiwer
-2025-11-30 18:31:59,027 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='Last Name']
-2025-11-30 18:33:18,549 - LoginPage - INFO - Opening Login Page
-2025-11-30 18:33:18,549 - LoginPage - INFO - Navigating to: https://demo.automationtesting.in/Register.html
-2025-11-30 18:33:20,582 - LoginPage - INFO - Entering first name: sdafsdf
-2025-11-30 18:33:20,582 - LoginPage - INFO - Filling: //input[@placeholder='First Name'] with value: sdafsdf
-2025-11-30 18:33:20,582 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='First Name']
-2025-11-30 18:33:20,748 - LoginPage - INFO - Entering last name: wiuertiwer
-2025-11-30 18:33:20,748 - LoginPage - INFO - Filling: //input[@placeholder='Last Name'] with value: wiuertiwer
-2025-11-30 18:33:20,749 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='Last Name']
-2025-11-30 18:41:25,833 - LoginPage - INFO - Opening Login Page
-2025-11-30 18:41:25,834 - LoginPage - INFO - Navigating to: https://demo.automationtesting.in/Register.html
-2025-11-30 18:41:29,220 - LoginPage - INFO - Entering first name: sdafsdf
-2025-11-30 18:41:29,221 - LoginPage - INFO - Filling: //input[@placeholder='First Name'] with value: sdafsdf
-2025-11-30 18:41:29,221 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='First Name']
-2025-11-30 18:41:29,536 - LoginPage - INFO - Entering last name: wiuertiwer
-2025-11-30 18:41:29,537 - LoginPage - INFO - Filling: //input[@placeholder='Last Name'] with value: wiuertiwer
-2025-11-30 18:41:29,537 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='Last Name']
-2025-12-10 12:49:21,051 - LoginPage - INFO - Opening Login Page
-2025-12-10 12:49:21,052 - LoginPage - INFO - Navigating to: https://demo.automationtesting.in/Register.html
-2025-12-10 12:49:23,699 - LoginPage - INFO - Entering first name: sdafsdf
-2025-12-10 12:49:23,699 - LoginPage - INFO - Filling: //input[@placeholder='First Name'] with value: sdafsdf
-2025-12-10 12:49:23,699 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='First Name']
-2025-12-10 12:49:23,905 - LoginPage - INFO - Entering last name: wiuertiwer
-2025-12-10 12:49:23,905 - LoginPage - INFO - Filling: //input[@placeholder='Last Name'] with value: wiuertiwer
-2025-12-10 12:49:23,906 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='Last Name']
-2025-12-10 09:56:11,875 - LoginPage - INFO - Opening Login Page
-2025-12-10 09:56:11,876 - LoginPage - INFO - Navigating to: https://demo.automationtesting.in/Register.html
-2025-12-10 09:56:13,725 - LoginPage - INFO - Entering first name: sdafsdf
-2025-12-10 09:56:13,725 - LoginPage - INFO - Filling: //input[@placeholder='First Name'] with value: sdafsdf
-2025-12-10 09:56:13,726 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='First Name']
-2025-12-10 09:56:13,827 - LoginPage - INFO - Entering last name: wiuertiwer
-2025-12-10 09:56:13,828 - LoginPage - INFO - Filling: //input[@placeholder='Last Name'] with value: wiuertiwer
-2025-12-10 09:56:13,828 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='Last Name']
-2025-12-11 05:05:42,015 - LoginPage - INFO - Opening Login Page
-2025-12-11 05:05:42,015 - LoginPage - INFO - Navigating to: https://demo.automationtesting.in/Register.html
-2025-12-11 05:05:44,686 - LoginPage - INFO - Entering first name: sdafsdf
-2025-12-11 05:05:44,687 - LoginPage - INFO - Filling: //input[@placeholder='First Name'] with value: sdafsdf
-2025-12-11 05:05:44,688 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='First Name']
-2025-12-11 05:05:44,801 - LoginPage - INFO - Entering last name: wiuertiwer
-2025-12-11 05:05:44,802 - LoginPage - INFO - Filling: //input[@placeholder='Last Name'] with value: wiuertiwer
-2025-12-11 05:05:44,802 - LoginPage - INFO - Waiting for element visible: //input[@placeholder='Last Name']
+2025-12-14 08:22:35,919 - RegisterPage - INFO - Launching URL: https://demo.automationtesting.in/Register.html
+2025-12-14 08:22:58,258 - test_register - INFO - Entering registration data
+2025-12-14 08:22:58,258 - RegisterPage - INFO - Entering value: John into element: //input[@placeholder='First Name']
+2025-12-14 08:22:58,340 - RegisterPage - INFO - Entering value: Doe into element: //input[@placeholder='Last Name']
+2025-12-14 08:22:58,379 - RegisterPage - INFO - Clicking on element: //BUTTON[@TYPE='submit']
+2025-12-14 08:31:03,334 - RegisterPage - INFO - Launching URL: https://demo.automationtesting.in/Register.html
+2025-12-14 08:31:05,440 - test_register - INFO - Entering registration data
+2025-12-14 08:31:05,440 - RegisterPage - INFO - Entering value: John into element: //input[@placeholder='First Name']
+2025-12-14 08:31:05,837 - RegisterPage - INFO - Entering value: Doe into element: //input[@placeholder='Last Name']
+2025-12-14 08:31:06,137 - RegisterPage - INFO - Clicking on element: //BUTTON[@TYPE='submit']
+2025-12-14 08:32:20,760 - RegisterPage - INFO - Launching URL: https://demo.automationtesting.in/Register.html
+2025-12-14 08:32:22,896 - test_register - INFO - Entering registration data
+2025-12-14 08:32:22,897 - RegisterPage - INFO - Entering value: John into element: //input[@placeholder='First Name']
+2025-12-14 08:32:23,005 - RegisterPage - INFO - Entering value: Doe into element: //input[@placeholder='Last Name']
+2025-12-14 08:32:23,045 - RegisterPage - INFO - Clicking on element: //BUTTON[@TYPE='submit']
+2025-12-14 08:32:41,538 - RegisterPage - INFO - Launching URL: https://demo.automationtesting.in/Register.html
+2025-12-14 08:32:43,683 - test_register - INFO - Entering registration data
+2025-12-14 08:32:43,684 - RegisterPage - INFO - Entering value: John into element: //input[@placeholder='First Name']
+2025-12-14 08:32:44,010 - RegisterPage - INFO - Entering value: Doe into element: //input[@placeholder='Last Name']
+2025-12-14 08:32:44,118 - RegisterPage - INFO - Clicking on element: //BUTTON[@TYPE='submit']
+2025-12-14 08:33:00,952 - RegisterPage - INFO - Launching URL: https://demo.automationtesting.in/Register.html
+2025-12-14 08:33:02,445 - test_register - INFO - Entering registration data
+2025-12-14 08:33:02,445 - RegisterPage - INFO - Entering value: John into element: //input[@placeholder='First Name']
+2025-12-14 08:33:02,606 - RegisterPage - INFO - Entering value: Doe into element: //input[@placeholder='Last Name']
+2025-12-14 08:33:02,809 - RegisterPage - INFO - Clicking on element: //BUTTON[@TYPE='submit']
+2025-12-14 08:42:59,610 - RegisterPage - INFO - Launching URL: https://demo.automationtesting.in/Register.html
+2025-12-14 08:43:01,017 - test_register - INFO - Entering registration data
+2025-12-14 08:43:01,017 - RegisterPage - INFO - Entering value: John into element: //input[@placeholder='First Name']
+2025-12-14 08:43:01,106 - RegisterPage - INFO - Entering value: Doe into element: //input[@placeholder='Last Name']
+2025-12-14 08:43:01,128 - RegisterPage - INFO - Clicking on element: //BUTTON[@TYPE='submit']
+2025-12-14 08:43:30,099 - RegisterPage - INFO - Launching URL: https://demo.automationtesting.in/Register.html
+2025-12-14 08:43:31,669 - test_register - INFO - Entering registration data
+2025-12-14 08:43:31,670 - RegisterPage - INFO - Entering value: John into element: //input[@placeholder='First Name']
+2025-12-14 08:43:31,753 - RegisterPage - INFO - Entering value: Doe into element: //input[@placeholder='Last Name']
+2025-12-14 08:43:31,798 - RegisterPage - INFO - Clicking on element: //BUTTON[@TYPE='submit']
+2025-12-14 08:45:28,741 - RegisterPage - INFO - Launching URL: https://opensource-demo.orangehrmlive.com/web/index.php/auth/login/Register.html
