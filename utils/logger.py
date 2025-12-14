@@ -3,30 +3,39 @@ import logging
 import logging.config
 from pathlib import Path
 
-_CONFIGURED = False
+_LOGGER_CACHE = {}
 
 
-def setup_logging():
-    """
-    Configure logging once per test session.
-    """
-    global _CONFIGURED
-    if _CONFIGURED:
-        return
-
+def setup_base_logging():
     config_path = Path(__file__).parent.parent / "configs" / "logger_config.json"
-
     with open(config_path, "r") as f:
         config = json.load(f)
 
-    # Ensure log directory exists
-    log_file = Path(config["handlers"]["file"]["filename"])
-    log_file.parent.mkdir(parents=True, exist_ok=True)
-
     logging.config.dictConfig(config)
-    _CONFIGURED = True
 
+def get_test_logger(test_id: str) -> logging.Logger:
+    """
+    Creates a dedicated logger per test.
+    """
+    if test_id in _LOGGER_CACHE:
+        return _LOGGER_CACHE[test_id]
 
-def get_logger(name: str) -> logging.Logger:
-    setup_logging()
-    return logging.getLogger(name)
+    logger = logging.getLogger(test_id)
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
+
+    log_dir = Path("reports/logs/tests")
+    log_dir.mkdir(parents=True, exist_ok=True)
+
+    safe_name = test_id.replace("::", "_").replace("/", "_")
+    file_handler = logging.FileHandler(log_dir / f"{safe_name}.log")
+
+    formatter = logging.Formatter(
+        "%(asctime)s - %(levelname)s - %(message)s"
+    )
+    file_handler.setFormatter(formatter)
+
+    logger.addHandler(file_handler)
+
+    _LOGGER_CACHE[test_id] = logger
+    return logger

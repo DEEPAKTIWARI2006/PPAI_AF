@@ -1,12 +1,14 @@
 # pages/base_page.py
+import allure
 from playwright.sync_api import expect
-from utils.logger import get_logger
 
 class BasePage:
-    def __init__(self, page, base_url):
+    def __init__(self, page, base_url, logger):
+        if logger is None:
+            raise ValueError("Logger must be provided to BasePage")
         self.page = page
         self.base_url = base_url
-        self.logger = get_logger(self.__class__.__name__)
+        self.logger = logger
         
     def open(self, path: str =""):
         url = f"{self.base_url}{path}"
