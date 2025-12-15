@@ -1,7 +1,9 @@
 import os
 import shutil
 from pathlib import Path
-
+from utils.data_loaders.json_loader import JsonLoader
+from utils.test_data_store import TestDataStore
+from utils.test_data_provider import TestDataProvider
 import pytest
 import allure
 from playwright.sync_api import sync_playwright
@@ -13,6 +15,7 @@ from core.context_factory import ContextFactory
 from pages.register_page import RegisterPage
 from utils.logger import get_test_logger
 from utils.pdf_report_generator import generate_pdf_report
+from utils.test_data_provider import TestDataProvider
 
 
 # ---------------------------------------------------------
@@ -29,6 +32,10 @@ def pytest_sessionstart(session):
         Path("reports/allure-results"),
         Path("reports/allure-report"),
     ]
+    
+    data_file = os.getenv("TEST_DATA_FILE", "data/register.json")
+    json_data = JsonLoader.load(data_file)
+    TestDataStore.initialize(json_data)
 
     for path in paths_to_clean:
         if path.exists():
@@ -183,3 +190,47 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
                 m["failures"][failure_type] += 1
 
     generate_pdf_report(summary)
+
+import pytest
+from utils.test_data_provider import TestDataProvider
+
+
+
+
+
+def pytest_generate_tests(metafunc):
+    """
+    Dynamically parametrize tests that use `test_data`.
+    """
+
+    if "test_data" not in metafunc.fixturenames:
+        return
+
+    node = metafunc.definition
+    test_id_marker = node.get_closest_marker("test_id")
+
+    if not test_id_marker:
+        raise ValueError(
+            f"{node.name} is missing @pytest.mark.test_id"
+        )
+
+    test_id = test_id_marker.args[0]
+
+    # Dataset from marker (smoke / regression / negative)
+    dataset_marker = (
+        node.get_closest_marker("smoke")
+        or node.get_closest_marker("regression")
+        or node.get_closest_marker("negative")
+    )
+
+    data_set = dataset_marker.name if dataset_marker else None
+
+    data = TestDataProvider.get_data(test_id, data_set)
+
+    if not data:
+        raise ValueError(
+            f"No test data found for test_id={test_id}, data_set={data_set}"
+        )
+
+    # 🔑 Key line: pytest handles iteration
+    metafunc.parametrize("test_data", data)

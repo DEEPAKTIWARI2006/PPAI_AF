@@ -20,7 +20,7 @@
     "chromium": {
       "engine": "chromium",
       "channel": "chrome",
-      "headless": true
+      "headless": false
     },
     "firefox": {
       "engine": "firefox",

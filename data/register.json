@@ -1,0 +1,262 @@
+{
+    "TC01": {
+        "smoke": [
+            {
+                "firstname": "Vivaan",
+                "email": "john@test.com",
+                "lastname": "Tiwari",
+                "expected": "success"
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "Sunil",
+                "email": "invalid",
+                "lastname": "",
+                "expected": "error"
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Ajay",
+                "email": "invalid",
+                "lastname": "Sharma",
+                "expected": "success"
+            }
+        ]
+    },
+    "TC02": {
+        "smoke": [
+            {
+                "firstname": "Ranbir",
+                "email": "john@test.com",
+                "lastname": "Kapoor",
+                "expected": "success"
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "",
+                "email": "invalid",
+                "lastname": "",
+                "expected": "error"
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Manoj",
+                "email": "invalid",
+                "lastname": "Bajpayee",
+                "expected": "success"
+            }
+        ]
+    },
+    "TC03": {
+        "smoke": [
+            {
+                "firstname": "Ahaan",
+                "email": "john@test.com",
+                "lastname": "Gowda",
+                "expected": "success"
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "",
+                "email": "",
+                "lastname": "",
+                "expected": "error"
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Ahaan",
+                "email": "invalid",
+                "lastname": "Gowda",
+                "expected": "success"
+            }
+        ]
+    },
+    "TC04": {
+        "smoke": [
+            {
+                "firstname": "Charan",
+                "email": "john@test.com",
+                "lastname": "Singh",
+                "expected": "success"
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "Sunil",
+                "email": "invalid",
+                "lastname": "",
+                "expected": "error"
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Charan",
+                "email": "invalid",
+                "lastname": "Singh",
+                "expected": "success"
+            }
+        ]
+    },
+    "TC05": {
+        "smoke": [
+            {
+                "firstname": "Rupesh",
+                "email": "john@test.com",
+                "lastname": "Verma",
+                "expected": "success"
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "Sunil",
+                "email": "invalid",
+                "lastname": "",
+                "expected": "error"
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Rupesh",
+                "email": "invalid",
+                "lastname": "Verma",
+                "expected": "success"
+            }
+        ]
+    },
+    "TC06": {
+        "smoke": [
+            {
+                "firstname": "Kumar",
+                "email": "john@test.com",
+                "lastname": "Vishwas",
+                "expected": "success"
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "Sunil",
+                "email": "invalid",
+                "lastname": "",
+                "expected": "error"
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Kumar",
+                "email": "invalid",
+                "lastname": "Vishwas",
+                "expected": "success"
+            }
+        ]
+    },
+    "TC07": {
+        "smoke": [
+            {
+                "firstname": "Mini",
+                "email": "john@test.com",
+                "lastname": "Modi",
+                "expected": "success"
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "Sunil",
+                "email": "invalid",
+                "lastname": "",
+                "expected": "error"
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Mini",
+                "email": "invalid",
+                "lastname": "Modi",
+                "expected": "success"
+            }
+        ]
+    },
+    "TC08": {
+        "smoke": [
+            {
+                "firstname": "Richa",
+                "email": "john@test.com",
+                "lastname": "Ghosh",
+                "expected": "success"
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "Sunil",
+                "email": "invalid",
+                "lastname": "",
+                "expected": "error"
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Richa",
+                "email": "invalid",
+                "lastname": "Ghosh",
+                "expected": "success"
+            }
+        ]
+    },
+    "TC09": {
+        "smoke": [
+            {
+                "firstname": "Kalki",
+                "email": "john@test.com",
+                "lastname": "Goel",
+                "expected": "success"
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "Sunil",
+                "email": "invalid",
+                "lastname": "",
+                "expected": "error"
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Kalki",
+                "email": "invalid",
+                "lastname": "Goel",
+                "expected": "success"
+            }
+        ]
+    },
+    "TC010": {
+        "smoke": [
+            {
+                "firstname": "Vihaan",
+                "email": "john@test.com",
+                "lastname": "De",
+                "expected": "success"
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "Sunil",
+                "email": "invalid",
+                "lastname": "",
+                "expected": "error"
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Vihaan",
+                "email": "invalid",
+                "lastname": "De",
+                "expected": "success"
+            }
+        ]
+    }
+}

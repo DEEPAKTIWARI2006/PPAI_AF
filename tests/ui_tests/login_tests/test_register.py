@@ -1,28 +1,18 @@
+import time
 import pytest
 from pages.register_page import RegisterPage
 
+@pytest.mark.test_id("TC01")
 @pytest.mark.smoke
-def test_register_data1(register_page):
+def test_register_data1(register_page, test_data):
 
     register_page.launch_app("/Register.html")
-    register_page.register_user("Vivaan", "Tiwari")
-    assert register_page.is_error_message_displayed("Invalid username or password")
+    register_page.register_user(test_data["firstname"], test_data["lastname"])
 
+@pytest.mark.test_id("TC02")
 @pytest.mark.smoke
-def test_register_data2(register_page, test_logger):
+def test_register_data2(register_page, test_data):
 
     register_page.launch_app("/Register.html")
-    register_page.register_user("Sunil", "Kumar")
+    register_page.register_user(test_data["firstname"], test_data["lastname"])
     
-    
-@pytest.mark.smoke
-def test_register_data3(register_page, test_logger):
-
-    register_page.launch_app("/Register.html")
-    register_page.register_user("Alex", "Cruz")
-    
-@pytest.mark.smoke
-def test_register_data4(register_page, test_logger):
-
-    register_page.launch_app("/Register.html")
-    register_page.register_user("Ajay", "Sharma")

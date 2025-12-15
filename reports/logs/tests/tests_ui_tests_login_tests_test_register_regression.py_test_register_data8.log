@@ -1,7 +1,0 @@
-2025-12-14 16:14:55,015 - INFO - Launching Registration Page
-2025-12-14 16:14:55,015 - INFO - Launching URL: https://demo.automationtesting.in/Register.html
-2025-12-14 16:14:58,068 - INFO - Entering first name
-2025-12-14 16:14:58,068 - INFO - Entering value: Ben into element: //input[@placeholder='First Name']
-2025-12-14 16:14:58,159 - INFO - Entering last name
-2025-12-14 16:14:58,159 - INFO - Entering value: Affleck into element: //input[@placeholder='Last Name']
-2025-12-14 16:14:58,191 - INFO - Clicking on element: //BUTTON[@TYPE='submit']
