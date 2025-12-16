@@ -1,11 +1,15 @@
 {
   "dev": {
-    "base_url": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
+    "base_url": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
+    "api_base_url": "https://reqres.in"
+
   },
   "qa": {
-    "base_url": "https://demo.automationtesting.in"
+    "base_url": "https://demo.automationtesting.in",
+    "api_base_url": "https://simple-books-api.glitch.me"
   },
   "prod": {
-    "base_url": "https://demo.automationtesting.in"
+    "base_url": "https://demo.automationtesting.in",
+    "api_base_url": "https://template.postman-echo.com"
   }
 }

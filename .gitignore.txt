@@ -2,6 +2,8 @@
 /test-results/
 /reports/
 
+*.pdf
+
 result.json
 
 # Screenshots and Videos

@@ -1,3 +1,4 @@
+from pathlib import Path
 from reportlab.platypus import (
     SimpleDocTemplate,
     Paragraph,
@@ -10,7 +11,6 @@ from reportlab.graphics.shapes import Drawing
 from reportlab.graphics.charts.piecharts import Pie
 from reportlab.graphics.charts.barcharts import VerticalBarChart
 from reportlab.lib import colors
-from pathlib import Path
 
 
 # ---------------------------------------------------------
@@ -21,9 +21,12 @@ def pass_percentage(passed, total):
 
 
 # ---------------------------------------------------------
-# Charts
+# Charts (DEFENSIVE)
 # ---------------------------------------------------------
 def create_overall_pie_chart(summary):
+    if summary["total"] == 0:
+        return None
+
     drawing = Drawing(300, 200)
     pie = Pie()
     pie.x = 50
@@ -32,12 +35,12 @@ def create_overall_pie_chart(summary):
     pie.height = 150
 
     pie.data = [
-        summary["passed"],
-        summary["failed"],
-        summary["skipped"]
+        summary.get("passed", 0),
+        summary.get("failed", 0),
+        summary.get("skipped", 0),
     ]
     pie.labels = ["Passed", "Failed", "Skipped"]
-    pie.slices.strokeWidth = 0.5
+
     pie.slices[0].fillColor = colors.green
     pie.slices[1].fillColor = colors.red
     pie.slices[2].fillColor = colors.orange
@@ -47,6 +50,19 @@ def create_overall_pie_chart(summary):
 
 
 def create_marker_bar_chart(summary):
+    markers = summary.get("markers", {})
+
+    if not markers:
+        return None
+
+    marker_names = list(markers.keys())
+    passed = [markers[m].get("passed", 0) for m in marker_names]
+    failed = [markers[m].get("failed", 0) for m in marker_names]
+
+    # Guard against empty data
+    if not marker_names or not any(passed + failed):
+        return None
+
     drawing = Drawing(450, 250)
     chart = VerticalBarChart()
     chart.x = 50
@@ -54,24 +70,36 @@ def create_marker_bar_chart(summary):
     chart.height = 150
     chart.width = 350
 
-    markers = list(summary["markers"].keys())
-    passed = [summary["markers"][m]["passed"] for m in markers]
-    failed = [summary["markers"][m]["failed"] for m in markers]
-
     chart.data = [passed, failed]
-    chart.categoryAxis.categoryNames = markers
+    chart.categoryAxis.categoryNames = marker_names
+    chart.valueAxis.valueMin = 0
+
     chart.bars[0].fillColor = colors.green
     chart.bars[1].fillColor = colors.red
-    chart.valueAxis.valueMin = 0
 
     drawing.add(chart)
     return drawing
 
 
 # ---------------------------------------------------------
-# Main PDF generator
+# Main PDF generator (SAFE)
 # ---------------------------------------------------------
 def generate_pdf_report(summary, output_path="reports/Test_Summary_Report.pdf"):
+    """
+    Generates a PDF test execution report.
+    Safe against:
+    - No tests collected
+    - Empty markers
+    - Partial failures
+    """
+
+    # -----------------------------
+    # Hard guard: no tests collected
+    # -----------------------------
+    if not summary or summary.get("total", 0) == 0:
+        print("[WARN] No test results available. Skipping PDF generation.")
+        return
+
     Path(output_path).parent.mkdir(parents=True, exist_ok=True)
 
     doc = SimpleDocTemplate(output_path, pagesize=A4)
@@ -96,75 +124,93 @@ def generate_pdf_report(summary, output_path="reports/Test_Summary_Report.pdf"):
         )
     )
 
-    elements.append(Spacer(1, 20))
-    elements.append(Paragraph("Overall Result Distribution", styles["Heading2"]))
-    elements.append(create_overall_pie_chart(summary))
+    # =====================================================
+    # Overall Pie Chart
+    # =====================================================
+    pie_chart = create_overall_pie_chart(summary)
+    if pie_chart:
+        elements.append(Spacer(1, 20))
+        elements.append(Paragraph("Overall Result Distribution", styles["Heading2"]))
+        elements.append(pie_chart)
 
     elements.append(Spacer(1, 30))
 
     # =====================================================
     # Marker-wise Summary Table
     # =====================================================
-    elements.append(Paragraph("Results by Marker", styles["Heading2"]))
-    elements.append(Spacer(1, 10))
+    markers = summary.get("markers", {})
 
-    table_data = [
-        ["Marker", "Passed", "Failed", "Skipped", "Pass %", "Duration (s)"]
-    ]
+    if markers:
+        elements.append(Paragraph("Results by Marker", styles["Heading2"]))
+        elements.append(Spacer(1, 10))
 
-    for marker, data in summary["markers"].items():
-        total = data["passed"] + data["failed"] + data["skipped"]
-        table_data.append([
-            marker,
-            data["passed"],
-            data["failed"],
-            data["skipped"],
-            f"{pass_percentage(data['passed'], total)}%",
-            round(data["duration"], 2)
-        ])
+        table_data = [
+            ["Marker", "Passed", "Failed", "Skipped", "Pass %", "Duration (s)"]
+        ]
 
-    table = Table(table_data, hAlign="LEFT")
-    table.setStyle([
-        ("GRID", (0, 0), (-1, -1), 0.5, colors.grey),
-        ("BACKGROUND", (0, 0), (-1, 0), colors.lightgrey)
-    ])
+        for marker, data in markers.items():
+            total = data["passed"] + data["failed"] + data["skipped"]
+            table_data.append([
+                marker,
+                data["passed"],
+                data["failed"],
+                data["skipped"],
+                f"{pass_percentage(data['passed'], total)}%",
+                round(data.get("duration", 0), 2)
+            ])
 
-    elements.append(table)
-    elements.append(Spacer(1, 30))
-
-    # =====================================================
-    # Marker-wise Bar Chart
-    # =====================================================
-    elements.append(Paragraph("Marker-wise Pass / Fail Distribution", styles["Heading2"]))
-    elements.append(create_marker_bar_chart(summary))
-    elements.append(Spacer(1, 30))
-
-    # =====================================================
-    # Failure Category Breakdown
-    # =====================================================
-    elements.append(Paragraph("Failure Categories by Marker", styles["Heading2"]))
-    elements.append(Spacer(1, 10))
-
-    for marker, data in summary["markers"].items():
-        if not data["failures"]:
-            continue
-
-        elements.append(Paragraph(f"Marker: {marker}", styles["Heading3"]))
-        failure_table = [["Failure Category", "Count"]]
-
-        for category, count in data["failures"].items():
-            failure_table.append([category, count])
-
-        table = Table(failure_table, hAlign="LEFT")
+        table = Table(table_data, hAlign="LEFT")
         table.setStyle([
             ("GRID", (0, 0), (-1, -1), 0.5, colors.grey),
             ("BACKGROUND", (0, 0), (-1, 0), colors.lightgrey)
         ])
 
         elements.append(table)
-        elements.append(Spacer(1, 20))
+        elements.append(Spacer(1, 30))
+
+        # =====================================================
+        # Marker-wise Bar Chart
+        # =====================================================
+        bar_chart = create_marker_bar_chart(summary)
+        if bar_chart:
+            elements.append(
+                Paragraph("Marker-wise Pass / Fail Distribution", styles["Heading2"])
+            )
+            elements.append(bar_chart)
+            elements.append(Spacer(1, 30))
 
     # =====================================================
-    # Build PDF
+    # Failure Categories
     # =====================================================
-    doc.build(elements)
+    if markers:
+        elements.append(Paragraph("Failure Categories by Marker", styles["Heading2"]))
+        elements.append(Spacer(1, 10))
+
+        for marker, data in markers.items():
+            failures = data.get("failures", {})
+            if not failures:
+                continue
+
+            elements.append(Paragraph(f"Marker: {marker}", styles["Heading3"]))
+
+            failure_table = [["Failure Category", "Count"]]
+            for category, count in failures.items():
+                failure_table.append([category, count])
+
+            table = Table(failure_table, hAlign="LEFT")
+            table.setStyle([
+                ("GRID", (0, 0), (-1, -1), 0.5, colors.grey),
+                ("BACKGROUND", (0, 0), (-1, 0), colors.lightgrey)
+            ])
+
+            elements.append(table)
+            elements.append(Spacer(1, 20))
+
+    # =====================================================
+    # Build PDF (FINAL)
+    # =====================================================
+    try:
+        doc.build(elements)
+        print(f"[INFO] PDF report generated at: {output_path}")
+    except Exception as e:
+        print(f"[ERROR] Failed to generate PDF report: {e}")

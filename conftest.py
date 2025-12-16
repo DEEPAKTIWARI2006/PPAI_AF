@@ -16,7 +16,7 @@ from pages.register_page import RegisterPage
 from utils.logger import get_test_logger
 from utils.pdf_report_generator import generate_pdf_report
 from utils.test_data_provider import TestDataProvider
-
+from _pytest.reports import TestReport
 
 # ---------------------------------------------------------
 # Session start: clean reports + create Allure env metadata
@@ -62,7 +62,7 @@ def env():
 
 @pytest.fixture(scope="session")
 def base_url(env):
-    return ConfigLoader.get_base_url(env)
+    return ConfigLoader.get_base_url()
 
 
 # ---------------------------------------------------------
@@ -143,58 +143,82 @@ def pytest_runtest_makereport(item, call):
 # ---------------------------------------------------------
 
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
+    """
+    Retry-safe, warning-safe, xdist-safe summary aggregation.
+    """
+
+    # ----------------------------------
+    # Guard: no tests collected
+    # ----------------------------------
+    if terminalreporter._numcollected == 0:
+        print("[WARN] No tests collected. Skipping PDF generation.")
+        return
+
     final_reports = {}
 
-    for _, reports in terminalreporter.stats.items():
+    # ----------------------------------
+    # Collect ONLY TestReport objects
+    # ----------------------------------
+    for reports in terminalreporter.stats.values():
         for report in reports:
+
+            # 🔑 Critical fix
+            if not isinstance(report, TestReport):
+                continue
+
             if report.when != "call":
                 continue
+
+            # Last attempt wins (retry-safe)
             final_reports[report.nodeid] = report
 
-    declared_markers = {
-        m.split(":")[0].strip()
-        for m in config.getini("markers")
-    }
-
-    summary = {
-        "total": len(final_reports),
-        "passed": 0,
-        "failed": 0,
-        "skipped": 0,
-        "markers": defaultdict(lambda: {
-            "passed": 0,
-            "failed": 0,
-            "skipped": 0,
-            "duration": 0.0,
-            "failures": defaultdict(int)
-        })
-    }
+    # ----------------------------------
+    # Aggregate results
+    # ----------------------------------
+    total = len(final_reports)
+    passed = failed = skipped = 0
+    marker_summary = {}
 
     for report in final_reports.values():
-        outcome = report.outcome
-        duration = getattr(report, "duration", 0.0)
+        if report.outcome == "passed":
+            passed += 1
+        elif report.outcome == "failed":
+            failed += 1
+        elif report.outcome == "skipped":
+            skipped += 1
 
-        summary[outcome] += 1
+        # Only real pytest markers
+        for marker in report.keywords:
+            if marker.startswith(("pytest", "py")):
+                continue
 
-        real_markers = [
-            m for m in report.keywords if m in declared_markers
-        ] or ["unmarked"]
+            marker_summary.setdefault(marker, {
+                "passed": 0,
+                "failed": 0,
+                "skipped": 0,
+                "duration": 0,
+                "failures": {}
+            })
 
-        for marker in real_markers:
-            m = summary["markers"][marker]
-            m[outcome] += 1
-            m["duration"] += duration
+            marker_summary[marker][report.outcome] += 1
+            marker_summary[marker]["duration"] += getattr(report, "duration", 0)
 
-            if outcome == "failed":
-                failure_type = classify_failure(report.longrepr)
-                m["failures"][failure_type] += 1
+    # ----------------------------------
+    # Build summary
+    # ----------------------------------
+    summary = {
+        "total": total,
+        "passed": passed,
+        "failed": failed,
+        "skipped": skipped,
+        "markers": marker_summary
+    }
 
+    # ----------------------------------
+    # Generate PDF
+    # ----------------------------------
+    from utils.pdf_report_generator import generate_pdf_report
     generate_pdf_report(summary)
-
-import pytest
-from utils.test_data_provider import TestDataProvider
-
-
 
 
 

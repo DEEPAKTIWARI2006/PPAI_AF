@@ -1,0 +1,11 @@
+# Treat all text files consistently
+* text=auto
+
+# Explicitly mark binaries
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.zip binary
+*.exe binary
