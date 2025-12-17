@@ -1,18 +1,26 @@
 # Playwright Test Results and Reports
-/test-results/
-/reports/
+test-results/
+reports/
+allure-results/
+allure-report/
 
 *.pdf
 
 result.json
 
 # Screenshots and Videos
-/screenshots/
-/videos/
+screenshots/
+videos/
 
-Python Cache data
-/__pycache__/
+# Python Cache data
+__pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+# Pytest
+.pytest_cache/
+.cache/
 
 
 # Environment files
@@ -22,6 +30,8 @@ Python Cache data
 
 # VS Code settings (optional - remove if you want to share settings)
 .vscode/
+.idea/
+.DS_Store
 
 
 # Logs

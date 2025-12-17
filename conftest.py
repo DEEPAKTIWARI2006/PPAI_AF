@@ -18,6 +18,9 @@ from utils.pdf_report_generator import generate_pdf_report
 from utils.test_data_provider import TestDataProvider
 from _pytest.reports import TestReport
 
+# Only business markers should appear in reports
+ALLOWED_MARKERS = {"api", "smoke", "regression"}
+
 # ---------------------------------------------------------
 # Session start: clean reports + create Allure env metadata
 # ---------------------------------------------------------
@@ -112,6 +115,13 @@ def pytest_runtest_makereport(item, call):
     if result.when != "call":
         return
 
+    if result.when == "call":
+        # Store ONLY business markers on the report
+        result.business_markers = [
+            m.name for m in item.iter_markers()
+            if m.name in {"api", "smoke", "regression"}
+        ]
+
     if result.failed:
         # Screenshot
         page = item.funcargs.get("page")
@@ -144,42 +154,49 @@ def pytest_runtest_makereport(item, call):
 
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
     """
-    Retry-safe, warning-safe, xdist-safe summary aggregation.
+    Enterprise-safe pytest summary aggregation.
+
+    ✔ No pytest internal noise
+    ✔ Only business markers
+    ✔ Retry-safe
+    ✔ Warning-safe
+    ✔ Zero-test safe
     """
 
-    # ----------------------------------
+    # --------------------------------------------------
     # Guard: no tests collected
-    # ----------------------------------
+    # --------------------------------------------------
     if terminalreporter._numcollected == 0:
         print("[WARN] No tests collected. Skipping PDF generation.")
         return
 
     final_reports = {}
 
-    # ----------------------------------
-    # Collect ONLY TestReport objects
-    # ----------------------------------
+    # --------------------------------------------------
+    # Collect ONLY final call-phase TestReports
+    # --------------------------------------------------
     for reports in terminalreporter.stats.values():
         for report in reports:
 
-            # 🔑 Critical fix
             if not isinstance(report, TestReport):
                 continue
 
             if report.when != "call":
                 continue
 
-            # Last attempt wins (retry-safe)
+            # Retry-safe: last attempt wins
             final_reports[report.nodeid] = report
 
-    # ----------------------------------
+    # --------------------------------------------------
     # Aggregate results
-    # ----------------------------------
+    # --------------------------------------------------
     total = len(final_reports)
     passed = failed = skipped = 0
     marker_summary = {}
 
     for report in final_reports.values():
+
+        # Overall outcome
         if report.outcome == "passed":
             passed += 1
         elif report.outcome == "failed":
@@ -187,11 +204,15 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
         elif report.outcome == "skipped":
             skipped += 1
 
-        # Only real pytest markers
-        for marker in report.keywords:
-            if marker.startswith(("pytest", "py")):
-                continue
+        # --------------------------------------------------
+        # Use markers captured earlier
+        # --------------------------------------------------
+        markers = getattr(report, "business_markers", [])
 
+        if not markers:
+            continue
+
+        for marker in markers:
             marker_summary.setdefault(marker, {
                 "passed": 0,
                 "failed": 0,
@@ -203,9 +224,9 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
             marker_summary[marker][report.outcome] += 1
             marker_summary[marker]["duration"] += getattr(report, "duration", 0)
 
-    # ----------------------------------
+    # --------------------------------------------------
     # Build summary
-    # ----------------------------------
+    # --------------------------------------------------
     summary = {
         "total": total,
         "passed": passed,
@@ -214,9 +235,9 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
         "markers": marker_summary
     }
 
-    # ----------------------------------
+    # --------------------------------------------------
     # Generate PDF
-    # ----------------------------------
+    # --------------------------------------------------
     from utils.pdf_report_generator import generate_pdf_report
     generate_pdf_report(summary)
 
