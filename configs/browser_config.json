@@ -19,19 +19,19 @@
   "browsers": {
     "chromium": {
       "engine": "chromium",
-      "headless": true
+      "headless": false
     },
     "firefox": {
       "engine": "firefox",
-      "headless": true
+      "headless": false
     },
     "webkit": {
       "engine": "webkit",
-      "headless": true
+      "headless": false
     },
     "edge": {
       "engine": "chromium",
-      "headless": true
+      "headless": false
     }
   },
 
