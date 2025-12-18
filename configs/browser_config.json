@@ -19,7 +19,6 @@
   "browsers": {
     "chromium": {
       "engine": "chromium",
-      "channel": "chrome",
       "headless": false
     },
     "firefox": {
