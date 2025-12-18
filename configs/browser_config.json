@@ -19,11 +19,11 @@
   "browsers": {
     "chromium": {
       "engine": "chromium",
-      "headless": false
+      "headless": true
     },
     "firefox": {
       "engine": "firefox",
-      "headless": false
+      "headless": true
     },
     "webkit": {
       "engine": "webkit",
@@ -31,7 +31,6 @@
     },
     "edge": {
       "engine": "chromium",
-      "channel": "msedge",
       "headless": true
     }
   },
