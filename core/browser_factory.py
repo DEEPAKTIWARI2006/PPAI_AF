@@ -7,6 +7,8 @@ class BrowserFactory:
 
     @staticmethod
     def launch_browser(playwright: Playwright):
+
+        # Load browser configuration from BrowserConfig class
         config = BrowserConfig.load()
 
         # -----------------------------
