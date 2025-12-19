@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 
 class BrowserConfig:
+    
+    #load the browser configuration from a JSON file
     _config = None
 
     @classmethod
