@@ -6,9 +6,6 @@ pytest-xdist
 pytest-html
 playwright
 pytest-playwright
-behave
-behave-html-formatter
-allure-behave
 allure-python-commons
 pytest-rerunfailures
 reportlab
