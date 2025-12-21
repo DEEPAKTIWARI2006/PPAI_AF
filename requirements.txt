@@ -9,4 +9,3 @@ pytest-playwright
 allure-python-commons
 pytest-rerunfailures
 reportlab
-

@@ -1,0 +1,40 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: Checkout
+  displayName: 'Checkout Code'
+  jobs:
+  - job: CheckoutJob
+    steps:
+    - checkout: self
+      clean: true
+
+- stage: Test
+  displayName: 'Run Playwright Tests (Docker)'
+  dependsOn: Checkout
+  jobs:
+  - job: PlaywrightDockerTests
+    steps:
+    - script: |
+        docker run --rm \
+        -e HEADLESS=true \
+        -v "$(Build.SourcesDirectory)":/app \
+        -w /app \
+        mcr.microsoft.com/playwright/python:v1.57.0-noble \
+        bash -c "pip install -r requirements.txt && playwright install chromium && pytest --alluredir=allure-results"
+      displayName: 'Run Playwright Tests in Docker'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Allure Results'
+      inputs:
+        pathToPublish: '$(Build.SourcesDirectory)/allure-results'
+        artifactName: 'allure-results'
