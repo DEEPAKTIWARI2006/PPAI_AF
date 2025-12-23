@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  shard1:
+    image: playwright-tests
+    command: pytest --splits 3 --group 1
+
+  shard2:
+    image: playwright-tests
+    command: pytest --splits 3 --group 2
+  shard3:
+    image: playwright-tests
+    command: pytest --splits 3 --group 3
+
