@@ -1,40 +1,83 @@
-# Playwright Test Results and Reports
+############################
+# Python
+############################
+__pycache__/
+*.py[cod]
+*$py.class
+
+############################
+# Pytest
+############################
+.pytest_cache/
+.cache/
+.coverage
+htmlcov/
+
+############################
+# Playwright
+############################
 test-results/
-reports/
+playwright-report/
+traces/
+videos/
+screenshots/
+*.webm
+*.zip
+
+############################
+# Allure
+############################
 allure-results/
 allure-report/
 
+############################
+# Test Outputs / Artifacts
+############################
+test_result.txt
+result.json
+reports/
+logs/
+*.log
 *.pdf
 
-result.json
-
-# Screenshots and Videos
-screenshots/
-videos/
-
-# Python Cache data
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-
-# Pytest
-.pytest_cache/
-.cache/
-
-
-# Environment files
+############################
+# Environment / Secrets
+############################
 .env
-.env.local
+.env.*
+*.env
 .env.*.local
+.env.template
 
-# VS Code settings (optional - remove if you want to share settings)
+############################
+# IDEs / Editors
+############################
 .vscode/
 .idea/
+*.iml
+
+############################
+# OS
+############################
 .DS_Store
+Thumbs.db
 
+############################
+# Docker
+############################
+*.pid
+*.lock
 
-# Logs
-*.log
-*.webm
-*.zip
+############################
+# Node (Playwright JS users, safe to keep)
+############################
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+############################
+# Misc
+############################
+tmp/
+temp/
