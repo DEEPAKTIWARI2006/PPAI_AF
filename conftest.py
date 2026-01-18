@@ -1,13 +1,11 @@
 import os
 import shutil
 from pathlib import Path
-from utils.data_loaders.json_loader import JsonLoader
-from utils.test_data_store import TestDataStore
-from utils.test_data_provider import TestDataProvider
 import pytest
 import allure
 from playwright.sync_api import sync_playwright
 from collections import defaultdict
+from pages.login_page import LoginPage
 from utils.failure_classifier import classify_failure
 from core.config_loader import ConfigLoader
 from core.browser_factory import BrowserFactory
@@ -15,11 +13,13 @@ from core.context_factory import ContextFactory
 from pages.register_page import RegisterPage
 from utils.logger import get_test_logger
 from utils.pdf_report_generator import generate_pdf_report
-from utils.test_data_provider import TestDataProvider
 from _pytest.reports import TestReport
+from utils.test_data_loader import TestDataLoader
+from data_models.data_factory import DataFactory
 
 # Only business markers should appear in reports
 ALLOWED_MARKERS = {"api", "smoke", "regression"}
+
 
 # ---------------------------------------------------------
 # Session start: clean reports + create Allure env metadata
@@ -35,10 +35,6 @@ def pytest_sessionstart(session):
         Path("reports/allure-results"),
         Path("reports/allure-report"),
     ]
-    
-    data_file = os.getenv("TEST_DATA_FILE", "data/register.json")
-    json_data = JsonLoader.load(data_file)
-    TestDataStore.initialize(json_data)
 
     for path in paths_to_clean:
         if path.exists():
@@ -49,10 +45,7 @@ def pytest_sessionstart(session):
     browser = os.getenv("BROWSER", "chromium")
 
     env_file = Path("reports/allure-results/environment.properties")
-    env_file.write_text(
-        f"Environment={env}\n"
-        f"Browser={browser}\n"
-    )
+    env_file.write_text(f"Environment={env}\n" f"Browser={browser}\n")
 
 
 # ---------------------------------------------------------
@@ -68,18 +61,23 @@ def base_url(env):
     return ConfigLoader.get_base_url()
 
 
+@pytest.fixture(scope="session")
+def playwright_instance():
+    with sync_playwright() as playwright:
+        yield playwright
+
+
 # ---------------------------------------------------------
 # Playwright page fixture (function-scoped, safe default)
 # ---------------------------------------------------------
 @pytest.fixture(scope="function")
-def page():
-    with sync_playwright() as playwright:
-        browser = BrowserFactory.launch_browser(playwright)
-        context = ContextFactory.create_context(browser)
-        page = context.new_page()
-        yield page
-        context.close()
-        browser.close()
+def page(playwright_instance):
+    browser = BrowserFactory.launch_browser(playwright_instance)
+    context = ContextFactory.create_context(browser)
+    page = context.new_page()
+    yield page
+    context.close()
+    browser.close()
 
 
 # ---------------------------------------------------------
@@ -93,6 +91,11 @@ def test_logger(request):
 # ---------------------------------------------------------
 # Page object fixture
 # ---------------------------------------------------------
+@pytest.fixture
+def login_page(page, base_url, test_logger):
+    return LoginPage(page, base_url, test_logger)
+
+
 @pytest.fixture
 def register_page(page, base_url, test_logger):
     return RegisterPage(page, base_url, test_logger)
@@ -118,7 +121,8 @@ def pytest_runtest_makereport(item, call):
     if result.when == "call":
         # Store ONLY business markers on the report
         result.business_markers = [
-            m.name for m in item.iter_markers()
+            m.name
+            for m in item.iter_markers()
             if m.name in {"api", "smoke", "regression"}
         ]
 
@@ -131,7 +135,7 @@ def pytest_runtest_makereport(item, call):
                 allure.attach(
                     screenshot,
                     name="Failure Screenshot",
-                    attachment_type=allure.attachment_type.PNG
+                    attachment_type=allure.attachment_type.PNG,
                 )
             except Exception as e:
                 print(f"[WARN] Screenshot capture failed: {e}")
@@ -144,13 +148,14 @@ def pytest_runtest_makereport(item, call):
             allure.attach(
                 log_file.read_text(),
                 name="Test Log",
-                attachment_type=allure.attachment_type.TEXT
+                attachment_type=allure.attachment_type.TEXT,
             )
 
 
 # ---------------------------------------------------------
 # Final aggregated summary + PDF generation (retry-safe)
 # ---------------------------------------------------------
+
 
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
     """
@@ -213,13 +218,10 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
             continue
 
         for marker in markers:
-            marker_summary.setdefault(marker, {
-                "passed": 0,
-                "failed": 0,
-                "skipped": 0,
-                "duration": 0,
-                "failures": {}
-            })
+            marker_summary.setdefault(
+                marker,
+                {"passed": 0, "failed": 0, "skipped": 0, "duration": 0, "failures": {}},
+            )
 
             marker_summary[marker][report.outcome] += 1
             marker_summary[marker]["duration"] += getattr(report, "duration", 0)
@@ -232,50 +234,25 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
         "passed": passed,
         "failed": failed,
         "skipped": skipped,
-        "markers": marker_summary
+        "markers": marker_summary,
     }
 
     # --------------------------------------------------
     # Generate PDF
     # --------------------------------------------------
     from utils.pdf_report_generator import generate_pdf_report
+
     generate_pdf_report(summary)
 
 
+@pytest.fixture
+def test_data(request):
+    flow = request.node.get_closest_marker("flow").args[0]
+    test_case_id = request.node.get_closest_marker("test_id").args[0]
+    category = request.node.get_closest_marker("category").args[0]
 
-def pytest_generate_tests(metafunc):
-    """
-    Dynamically parametrize tests that use `test_data`.
-    """
+    raw = TestDataLoader.load(flow=flow, test_case_id=test_case_id, category=category)
 
-    if "test_data" not in metafunc.fixturenames:
-        return
-
-    node = metafunc.definition
-    test_id_marker = node.get_closest_marker("test_id")
-
-    if not test_id_marker:
-        raise ValueError(
-            f"{node.name} is missing @pytest.mark.test_id"
-        )
-
-    test_id = test_id_marker.args[0]
-
-    # Dataset from marker (smoke / regression / negative)
-    dataset_marker = (
-        node.get_closest_marker("smoke")
-        or node.get_closest_marker("regression")
-        or node.get_closest_marker("negative")
+    return DataFactory.create(
+        flow=flow, raw=raw, test_case_id=test_case_id, category=category
     )
-
-    data_set = dataset_marker.name if dataset_marker else None
-
-    data = TestDataProvider.get_data(test_id, data_set)
-
-    if not data:
-        raise ValueError(
-            f"No test data found for test_id={test_id}, data_set={data_set}"
-        )
-
-    # 🔑 Key line: pytest handles iteration
-    metafunc.parametrize("test_data", data)

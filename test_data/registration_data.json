@@ -1,0 +1,395 @@
+{
+    "TC01": {
+        "smoke": [
+            {
+                "firstname": "Vivaan",
+                "lastname": "Tiwari",
+                "email": "john@test.com",
+                "address": "123 Main St",
+                "gender": "Male",
+                "phone": "1234567890",
+                "hobbies": ["Movies", "Cricket"],
+                "languages": ["Greek", "Hindi"],
+                "skills": "Java",
+                "country": "India",
+                "dob_year": "1990",
+                "dob_month": "February",
+                "dob_day": "15",
+                "password": "Password123",
+                "confirm_password": "Password123",
+                "expected_err": "Please select an item in the list."
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "Vivaan",
+                "lastname": "Tiwari",
+                "email": "john@test.com",
+                "address": "123 Main St",
+                "gender": "female",
+                "phone": "1234567890",
+                "hobbies": ["cricket", "movies"],
+                "languages": ["Greek", "Hindi"],
+                "skills": "Java",
+                "dob_year": "1990",
+                "dob_month": "February",
+                "dob_day": "15",
+                "password": "Password123",
+                "confirm_password": "Password123",
+                "expected_err": "Please select an item in the list."
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Vivaan",
+                "lastname": "Tiwari",
+                "email": "john@test.com",
+                "address": "123 Main St",
+                "gender": "female",
+                "phone": "1234567890",
+                "hobbies": ["cricket", "movies"],
+                "languages": ["Greek", "Hindi"],
+                "skills": "Java",
+                "dob_year": "1990",
+                "dob_month": "February",
+                "dob_day": "15",
+                "password": "Password123",
+                "confirm_password": "Password123",
+                "expected_err": "Please select an item in the list."
+            }
+        ]
+    },
+    "TC02": {
+        "smoke": [
+            {
+                "firstname": "Vivaan",
+                "lastname": "Tiwari",
+                "email": "john@test.com",
+                "address": "123 Main St",
+                "gender": "female",
+                "phone": "1234567890",
+                "hobbies": ["cricket", "movies"],
+                "languages": ["Greek", "Hindi"],
+                "skills": "Java",
+                "dob_year": "1990",
+                "dob_month": "February",
+                "dob_day": "15",
+                "password": "Password123",
+                "confirm_password": "Password123",
+                "expected_err": "Please select an item in the list."
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "Vivaan",
+                "lastname": "Tiwari",
+                "email": "john@test.com",
+                "address": "123 Main St",
+                "gender": "female",
+                "phone": "1234567890",
+                "hobbies": ["cricket", "movies"],
+                "languages": ["Greek", "Hindi"],
+                "skills": "Java",
+                "dob_year": "1990",
+                "dob_month": "February",
+                "dob_day": "15",
+                "password": "Password123",
+                "confirm_password": "Password123",
+                "expected_err": "Please select an item in the list."
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Vivaan",
+                "lastname": "Tiwari",
+                "email": "john@test.com",
+                "address": "123 Main St",
+                "gender": "female",
+                "phone": "1234567890",
+                "hobbies": ["cricket", "movies"],
+                "languages": ["Greek", "Hindi"],
+                "skills": "Java",
+                "dob_year": "1990",
+                "dob_month": "February",
+                "dob_day": "15",
+                "password": "Password123",
+                "confirm_password": "Password123",
+                "expected_err": "Please select an item in the list."
+            }
+        ]
+    },
+    "TC03": {
+        "smoke": [
+            {
+                "firstname": "Vivaan",
+                "lastname": "Tiwari",
+                "email": "john@test.com",
+                "address": "123 Main St",
+                "gender": "female",
+                "phone": "1234567890",
+                "hobbies": ["cricket", "movies"],
+                "languages": ["Greek", "Hindi"],
+                "skills": "Java",
+                "dob_year": "1990",
+                "dob_month": "February",
+                "dob_day": "15",
+                "password": "Password123",
+                "confirm_password": "Password123",
+                "expected_err": "Please select an item in the list."
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "Vivaan",
+                "lastname": "Tiwari",
+                "email": "john@test.com",
+                "address": "123 Main St",
+                "gender": "female",
+                "phone": "1234567890",
+                "hobbies": ["cricket", "movies"],
+                "languages": ["Greek", "Hindi"],
+                "skills": "Java",
+                "dob_year": "1990",
+                "dob_month": "February",
+                "dob_day": "15",
+                "password": "Password123",
+                "confirm_password": "Password123",
+                "expected_err": "Please select an item in the list."
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Vivaan",
+                "lastname": "Tiwari",
+                "email": "john@test.com",
+                "address": "123 Main St",
+                "gender": "female",
+                "phone": "1234567890",
+                "hobbies": ["cricket", "movies"],
+                "languages": ["Greek", "Hindi"],
+                "skills": "Java",
+                "dob_year": "1990",
+                "dob_month": "February",
+                "dob_day": "15",
+                "password": "Password123",
+                "confirm_password": "Password123",
+                "expected_err": "Please select an item in the list."
+            }
+        ]
+    },
+    "TC04": {
+        "smoke": [
+            {
+                "firstname": "Vivaan",
+                "lastname": "Tiwari",
+                "email": "john@test.com",
+                "address": "123 Main St",
+                "gender": "female",
+                "phone": "1234567890",
+                "hobbies": ["cricket", "movies"],
+                "languages": ["Greek", "Hindi"],
+                "skills": "Java",
+                "dob_year": "1990",
+                "dob_month": "February",
+                "dob_day": "15",
+                "password": "Password123",
+                "confirm_password": "Password123",
+                "expected_err": "Please select an item in the list."
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "Vivaan",
+                "lastname": "Tiwari",
+                "email": "john@test.com",
+                "address": "123 Main St",
+                "gender": "female",
+                "phone": "1234567890",
+                "hobbies": ["cricket", "movies"],
+                "languages": ["Greek", "Hindi"],
+                "skills": "Java",
+                "dob_year": "1990",
+                "dob_month": "February",
+                "dob_day": "15",
+                "password": "Password123",
+                "confirm_password": "Password123",
+                "expected_err": "Please select an item in the list."
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Vivaan",
+                "lastname": "Tiwari",
+                "email": "john@test.com",
+                "address": "123 Main St",
+                "gender": "female",
+                "phone": "1234567890",
+                "hobbies": ["cricket", "movies"],
+                "languages": ["Greek", "Hindi"],
+                "skills": "Java",
+                "dob_year": "1990",
+                "dob_month": "February",
+                "dob_day": "15",
+                "password": "Password123",
+                "confirm_password": "Password123",
+                "expected_err": "Please select an item in the list."
+            }
+        ]
+    },
+    "TC05": {
+        "smoke": [
+            {
+                "firstname": "Rupesh",
+                "email": "john@test.com",
+                "lastname": "Verma",
+                "expected_err": "success"
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "Sunil",
+                "email": "invalid",
+                "lastname": "",
+                "expected_err": "error"
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Rupesh",
+                "email": "invalid",
+                "lastname": "Verma",
+                "expected_err": "success"
+            }
+        ]
+    },
+    "TC06": {
+        "smoke": [
+            {
+                "firstname": "Kumar",
+                "email": "john@test.com",
+                "lastname": "Vishwas",
+                "expected_err": "success"
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "Sunil",
+                "email": "invalid",
+                "lastname": "",
+                "expected_err": "error"
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Kumar",
+                "email": "invalid",
+                "lastname": "Vishwas",
+                "expected_err": "success"
+            }
+        ]
+    },
+    "TC07": {
+        "smoke": [
+            {
+                "firstname": "Mini",
+                "email": "john@test.com",
+                "lastname": "Modi",
+                "expected_err": "success"
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "Sunil",
+                "email": "invalid",
+                "lastname": "",
+                "expected_err": "error"
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Mini",
+                "email": "invalid",
+                "lastname": "Modi",
+                "expected_err": "success"
+            }
+        ]
+    },
+    "TC08": {
+        "smoke": [
+            {
+                "firstname": "Richa",
+                "email": "john@test.com",
+                "lastname": "Ghosh",
+                "expected_err": "success"
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "Sunil",
+                "email": "invalid",
+                "lastname": "",
+                "expected_err": "error"
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Richa",
+                "email": "invalid",
+                "lastname": "Ghosh",
+                "expected_err": "success"
+            }
+        ]
+    },
+    "TC09": {
+        "smoke": [
+            {
+                "firstname": "Kalki",
+                "email": "john@test.com",
+                "lastname": "Goel",
+                "expected_err": "success"
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "Sunil",
+                "email": "invalid",
+                "lastname": "",
+                "expected_err": "error"
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Kalki",
+                "email": "invalid",
+                "lastname": "Goel",
+                "expected_err": "success"
+            }
+        ]
+    },
+    "TC010": {
+        "smoke": [
+            {
+                "firstname": "Vihaan",
+                "email": "john@test.com",
+                "lastname": "De",
+                "expected_err": "success"
+            }
+        ],
+        "negative": [
+            {
+                "firstname": "Sunil",
+                "email": "invalid",
+                "lastname": "",
+                "expected_err": "error"
+            }
+        ],
+        "regression": [
+            {
+                "firstname": "Vihaan",
+                "email": "invalid",
+                "lastname": "De",
+                "expected_err": "success"
+            }
+        ]
+    }
+}

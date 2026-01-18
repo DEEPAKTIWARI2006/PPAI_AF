@@ -6,7 +6,7 @@
   },
   "qa": {
     "base_url": "https://demo.automationtesting.in",
-    "api_base_url": "https://simple-books-api.glitch.me"
+    "api_base_url": "https://fakestoreapi.com"
   },
   "prod": {
     "base_url": "https://demo.automationtesting.in",
