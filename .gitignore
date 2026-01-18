@@ -4,13 +4,14 @@
 __pycache__/
 *.py[cod]
 *$py.class
+venv/
 
 ############################
 # Pytest
 ############################
 .pytest_cache/
 .cache/
-.coverage
+.coveragevenv
 htmlcov/
 
 ############################

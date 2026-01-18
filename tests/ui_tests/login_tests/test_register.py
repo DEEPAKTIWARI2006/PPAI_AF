@@ -2,7 +2,6 @@
 
 import pytest
 
-
 @pytest.mark.flow("registration")
 @pytest.mark.test_id("TC01")
 @pytest.mark.category("smoke")
