@@ -1,0 +1,71 @@
+{
+    "TC01": {
+        "smoke": [
+            {
+                "username": "deepaktiwari1982433",
+                "password": "kjfhwk",
+                "expected": "success"
+            }
+        ],
+        "negative": [
+            {
+                "username": "deepaktiwari1982433",
+                "password": "kjfhwk",
+                "expected": "error"
+            }
+        ],
+        "regression": [
+            {
+                "username": "Ajay",
+                "password": "invalid",
+                "expected": "success"
+            }
+        ]
+    },
+    "TC02": {
+        "smoke": [
+            {
+                "username": "Ranbir",
+                "password": "john@test.com",
+                "expected": "success"
+            }
+        ],
+        "negative": [
+            {
+                "username": "deepaktiwari1982433",
+                "password": "kjfhwk",
+                "expected": "error"
+            }
+        ],
+        "regression": [
+            {
+                "username": "RanbirKapoor",
+                "password": "john@test.com",
+                "expected": "success"
+            }
+        ]
+    },
+    "TC03": {
+        "smoke": [
+            {
+                "username": "AliaBhatt",
+                "password": "sjkhfgskdj.com",
+                "expected": "success"
+            }
+        ],
+        "negative": [
+            {
+                "username": "",
+                "password": ".com",
+                "expected": "success"
+            }
+        ],
+        "regression": [
+            {
+                "username": "KapilSharmaBhatt",
+                "password": "asasdasd.com",
+                "expected": "success"
+            }
+        ]
+    }
+}
